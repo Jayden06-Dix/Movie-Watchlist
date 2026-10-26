@@ -1,0 +1,50 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+}
+
+/* Header */
+
+header{
+    background: linear-gradient(rgba(14, 14, 14, 0.4), #0E0E0E), url(watchlist-header.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%, cover;
+    background-position: center, center -120px;
+    background-color: #0E0E0E;
+    height: 35vh;
+    width: 100%;
+    color: #F7F7F7;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 480px) {
+    header{
+        flex-direction: column;
+        height: 25vh;
+    }
+}
+
+h1{
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: calc(42.79 / 16 * 1em);
+    line-height: 23.77px;
+    letter-spacing: -4.5%;
+    text-align: justify;
+    vertical-align: middle;
+}
+
+#nav{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: calc(14 / 16 * 1em);
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: right;
+    color: #F7F7F7;
+}
+
