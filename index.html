@@ -1,9 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <!-- Meta viewport-->
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--Links - Fonts etc.-->
+        <!-- Links - Fonts etc. -->
+        <link rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" 
+            integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
@@ -14,7 +19,25 @@
             <h1>Find your film</h1>
             <a id="nav" href="watchlist.html">My Watchlist</a>
         </header>
-        
+
+        <main>
+            <form class="search">
+                <input type="text" id="search-input" placeholder="Blade Runner">
+                <button type="submit" id="search-btn">
+                    <span class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                Search</button>
+            </form>
+            <!-- results / "Start exploring" go here -->
+             <section id="results" class="default-state">
+                <div>
+                  <i class="fa-solid fa-film"></i>
+                  <h4>Start exploring</h4> 
+                </div>
+             </section>
+        </main>
+
         <script type="module" src="index.js"></script>
     </body>
 </html>

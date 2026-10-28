@@ -2,49 +2,316 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: #121212;
+    min-height: 100%;
+    font-family: 'Inter', sans-serif; /* NEW: fixes the serif font */
+    color: #F7F7F7;                   /* NEW: light text by default */
 }
 
 /* Header */
 
-header{
-    background: linear-gradient(rgba(14, 14, 14, 0.4), #0E0E0E), url(watchlist-header.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%, cover;
-    background-position: center, center -120px;
-    background-color: #0E0E0E;
-    height: 35vh;
+header {
+    background:
+        linear-gradient(rgba(14, 14, 14, 0.45), rgba(14, 14, 14, 0.45)),
+        url(watchlist-header.png) center 35% / cover no-repeat;
+    background-color: #121212;
+    height: clamp(220px, 40vh, 420px);
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 1.5rem 1.5rem;
     color: #F7F7F7;
     display: flex;
-    justify-content: space-evenly;
-    align-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 2.67rem;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    margin: 0;
+}
+
+#nav, .nav {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 20px;
+    color: #F7F7F7;
+    text-decoration: none;
+}
+
+/* Search */
+
+main {
+    padding: 0 1.5rem;
+}
+
+.search {
+    display: flex;
+    height: 3rem;
+    margin-top: -1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.search input {
+    flex: 1;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    background: #2E2E2F;
+    box-shadow: 0 1px 2px 0 #0000000D;
+    color: #F7F7F7;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    padding: 0 1rem 0 2.5rem; /* CHANGED: removed the duplicate padding line above it */
+}
+
+.search input::placeholder {
+    color: #B5B5B5;
+}
+
+.search button {
+    height: 100%;
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    background: #4a4a4a;
+    color: #F7F7F7;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* "Start exploring" placeholder (only applies while #results has this class) */
+
+.default-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+    color: #3A3A3A;
+}
+
+.default-state i {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.75rem;
+}
+
+.default-state h4 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Watchlist page placeholder */
+
+.watchlist-default-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+    color: #3A3A3A;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.container i, a {
+    margin-top: 0.8rem;
+}
+
+.watchlist-default-state h4 {
+    color: #787878;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.watchlist-default-state i {
+    color: #F7F7F7;
+    width: 18px;
+}
+
+.watchlist-default-state p {
+    color: #F7F7F7;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+/* Movie results (rendered by JS) */
+
+/* NEW: styles the "Searching...", "No results" and error messages */
+#results > p {
+    padding: 1.5rem 0;
+    margin: 0;
+    color: #B5B5B5;
+}
+
+/* Each movie row: poster on the left, info on the right, line underneath */
+.movie-result {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #ffffff;
+    text-align: left; /* NEW: safety, so text is never centred */
+}
+
+/* No line after the last movie */
+.movie-result:last-child {
+    border-bottom: none;
+}
+
+/* Fixed poster size so it can't blow up to full size */
+.movie-result img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #2E2E2F; /* NEW: dark box shows while the poster loads */
+}
+
+/* Info column takes the remaining space and stacks its three rows */
+.movie-info {
+    flex: 1;
+    min-width: 0; /* NEW: stops long text from forcing the column wider */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Title and rating side by side */
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.movie-rating {
+    margin: 0;
+    font-size: 0.875rem;
+    display: flex;        /* NEW: lines up star and number */
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* NEW: yellow star, so you don't need the inline style */
+.movie-rating i {
+    color: #FEC654;
+    font-size: 0.75rem;
+}
+
+/* Row 2: runtime, genre, and watchlist button in one line */
+.info-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* NEW: wraps on narrow screens instead of overflowing */
+    gap: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+.info-container p {
+    margin: 0;
+}
+
+/* Make the button look like plain text with an icon */
+.watchlist-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    padding: 0; /* NEW: removes the default button padding */
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+/* NEW: keeps the + icon small even if another rule targets <i> */
+.watchlist-btn i {
+    font-size: 1rem;
+}
+
+/* The plot */
+.movie-desc {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #a0a0a5;
+}
+
+/* Read More button */
+.read-more {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #F7F7F7;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Hidden Class Rule */
+.hidden {
+    display: none;
+}
+
+/* Media Queries */
+
 @media screen and (max-width: 480px) {
-    header{
+    header {
+        height: 160px;
         flex-direction: column;
-        height: 25vh;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
+        margin: 0;
+    }
+
+    .watchlist-default-state h4 {
+        font-size: 1rem;
     }
 }
 
-h1{
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: calc(42.79 / 16 * 1em);
-    line-height: 23.77px;
-    letter-spacing: -4.5%;
-    text-align: justify;
-    vertical-align: middle;
-}
+@media screen and (min-width: 768px) {
+    .plot-short,
+    .read-more {
+        display: none;
+    }
 
-#nav{
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: calc(14 / 16 * 1em);
-    line-height: 20px;
-    letter-spacing: 0%;
-    text-align: right;
-    color: #F7F7F7;
+    .plot-full.hidden {
+        display: inline;
+    }
 }
-
