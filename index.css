@@ -3,8 +3,8 @@ html, body {
     padding: 0;
     background-color: #121212;
     min-height: 100%;
-    font-family: 'Inter', sans-serif; /* NEW: fixes the serif font */
-    color: #F7F7F7;                   /* NEW: light text by default */
+    font-family: 'Inter', sans-serif; 
+    color: #F7F7F7;                   
 }
 
 /* Header */
@@ -77,7 +77,7 @@ main {
     color: #F7F7F7;
     font-family: 'Inter', sans-serif;
     font-size: 0.875rem;
-    padding: 0 1rem 0 2.5rem; /* CHANGED: removed the duplicate padding line above it */
+    padding: 0 1rem 0 2.5rem; 
 }
 
 .search input::placeholder {
@@ -166,7 +166,7 @@ main {
 
 /* Movie results (rendered by JS) */
 
-/* NEW: styles the "Searching...", "No results" and error messages */
+/* styles the "Searching...", "No results" and error messages */
 #results > p {
     padding: 1.5rem 0;
     margin: 0;
@@ -179,7 +179,7 @@ main {
     gap: 1.25rem;
     padding: 1.5rem 0;
     border-bottom: 1px solid #ffffff;
-    text-align: left; /* NEW: safety, so text is never centred */
+    text-align: left; 
 }
 
 /* No line after the last movie */
@@ -187,19 +187,19 @@ main {
     border-bottom: none;
 }
 
-/* Fixed poster size so it can't blow up to full size */
+/* Fixed poster size so it can't go full size */
 .movie-result img {
     width: 100px;
     height: 150px;
     object-fit: cover;
     flex-shrink: 0;
-    background: #2E2E2F; /* NEW: dark box shows while the poster loads */
+    background: #2E2E2F; /* Dark box shows while the poster loads */
 }
 
 /* Info column takes the remaining space and stacks its three rows */
 .movie-info {
     flex: 1;
-    min-width: 0; /* NEW: stops long text from forcing the column wider */
+    min-width: 0; /* Stops long text from forcing the column wider */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -221,22 +221,21 @@ main {
 .movie-rating {
     margin: 0;
     font-size: 0.875rem;
-    display: flex;        /* NEW: lines up star and number */
+    display: flex;        
     align-items: center;
     gap: 0.25rem;
 }
 
-/* NEW: yellow star, so you don't need the inline style */
 .movie-rating i {
     color: #FEC654;
     font-size: 0.75rem;
 }
 
-/* Row 2: runtime, genre, and watchlist button in one line */
+/* Runtime, genre, and watchlist button in one line */
 .info-container {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; /* NEW: wraps on narrow screens instead of overflowing */
+    flex-wrap: wrap; 
     gap: 0.5rem 1rem;
     font-size: 0.75rem;
 }
@@ -252,13 +251,12 @@ main {
     gap: 0.4rem;
     background: none;
     border: none;
-    padding: 0; /* NEW: removes the default button padding */
+    padding: 0; 
     color: inherit;
     font: inherit;
     cursor: pointer;
 }
 
-/* NEW: keeps the + icon small even if another rule targets <i> */
 .watchlist-btn i {
     font-size: 1rem;
 }
